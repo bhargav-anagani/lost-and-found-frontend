@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Make sure body takes full height and uses responsive font */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif; /* Or Tailwind default */
+}
+
+/* Images should scale on mobile */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Prevent horizontal scroll issues */
+* {
+  box-sizing: border-box;
+}
+
+/* Optional: smooth scroll for mobile */
+html {
+  scroll-behavior: smooth;
+}
