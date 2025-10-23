@@ -88,7 +88,7 @@ export default function ItemCard({ item }) {
             <span className="ml-1 text-gray-900 font-sans">{item.status}</span>
           </p>
 
-          {/* View Details Link */}
+          {/* View Details Link 
           <div>
             <Link
               to={`/items/${item._id}`}
@@ -96,7 +96,7 @@ export default function ItemCard({ item }) {
             >
               Edit details
             </Link>
-          </div>
+          </div>*/}
         </div>
       </div>
 

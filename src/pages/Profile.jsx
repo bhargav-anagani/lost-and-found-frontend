@@ -7,7 +7,6 @@ export default function Profile() {
   const [items, setItems] = useState([]);
   const [deletingId, setDeletingId] = useState(null);
 
-  // Get user info from localStorage
   const [user, setUser] = useState({ name: '', email: '' });
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -50,52 +49,49 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-4 sm:p-6">
       {/* User Info */}
-{/* User Info */}
-{/* User Info */}
-<div className="mb-6 bg-gray-100 p-4 rounded shadow max-w-md">
-  <h2 className="text-2xl font-bold font-serif break-words">Name: {user.name || 'Your Name'}</h2>
-  <h2 className="text-gray-700 break-words">Email: {user.email || 'your.email@example.com'}</h2>
-</div>
-
-
+      <div className="mb-6 bg-gray-100 p-4 rounded shadow max-w-md sm:max-w-full">
+        <h2 className="text-xl sm:text-2xl font-bold font-serif break-words">Name: {user.name || 'Your Name'}</h2>
+        <h2 className="text-gray-700 text-sm sm:text-base break-words">Email: {user.email || 'your.email@example.com'}</h2>
+      </div>
 
       {/* Uploads Section */}
       {items.length > 0 ? (
         <>
-          <h2 className="text-xl font-bold mb-4 text-white font-serif">Your uploads:</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <h2 className="text-lg sm:text-xl font-bold mb-4 text-white font-serif">Your uploads:</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4">
             {items.map(it => (
               <div
                 key={it._id}
-                className="bg-white p-5 rounded-lg shadow-lg border border-gray-200"
+                className="bg-white p-4 sm:p-5 rounded-lg shadow-lg border border-gray-200 flex flex-col justify-between"
               >
-                <h3 className="font-semibold text-3xl mb-3 font-serif">{it.itemName}</h3>
-                <p className="text-base"><span className="font-bold">Status:</span> {it.status}</p>
+                <div>
+                  <h3 className="font-semibold text-xl sm:text-2xl mb-2 sm:mb-3 font-serif">{it.itemName}</h3>
+                  <p className="text-sm sm:text-base mb-1"><span className="font-bold">Status:</span> {it.status}</p>
+                  {it.type === 'Found' ? (
+                    <p className="text-sm sm:text-base mb-1">
+                      <span className="font-bold">Found at:</span> {it.foundDateTime || 'N/A'}
+                    </p>
+                  ) : (
+                    <p className="text-sm sm:text-base mb-1">
+                      <span className="font-bold">Lost at:</span> {it.lostDateTime || 'N/A'}
+                    </p>
+                  )}
+                </div>
 
-                {it.type === 'Found' ? (
-                  <p className="text-base">
-                    <span className="font-bold">Found at:</span> {it.foundDateTime || 'N/A'}
-                  </p>
-                ) : (
-                  <p className="text-base">
-                    <span className="font-bold">Lost at:</span> {it.lostDateTime || 'N/A'}
-                  </p>
-                )}
-
-                {/* Edit & Delete Buttons */}
-                <div className="flex space-x-2 mt-3">
+                {/* Buttons */}
+                <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0 mt-3">
                   <Link
                     to={`/items/${it._id}`}
-                    className="px-3 py-1 bg-red-500 text-white rounded hover:opacity-90"
+                    className="px-3 py-2 bg-blue-600 text-white rounded hover:opacity-90 text-center"
                   >
                     Edit
                   </Link>
                   <button
                     onClick={() => handleDelete(it)}
                     disabled={deletingId === it._id}
-                    className="px-3 py-1 bg-red-500 text-white rounded hover:opacity-90"
+                    className="px-3 py-2 bg-red-500 text-white rounded hover:opacity-90"
                   >
                     {deletingId === it._id ? 'Deleting...' : 'Delete'}
                   </button>
@@ -106,7 +102,7 @@ export default function Profile() {
         </>
       ) : (
         // No uploads placeholder
-        <div className="flex flex-col items-center justify-center mt-6">
+        <div className="flex flex-col items-center justify-center mt-6 text-center">
           <FaBoxOpen className="text-gray-400 text-5xl mb-3" />
           <p className="text-white text-xl font-semibold font-serif">No uploads yet</p>
           <p className="text-gray-400 mt-1 text-sm">Start by uploading a lost or found item</p>
