@@ -47,6 +47,8 @@ export default function Nav() {
             <>
               <Link to="/login" className="hover:text-white transition">Login</Link>
               <Link to="/register" className="hover:text-white transition">Register</Link>
+              <Link to="/contact" className="hover:text-white transition">Contact</Link>
+              
             </>
           )}
         </div>
@@ -71,8 +73,10 @@ export default function Nav() {
             </>
           ) : (
             <>
+             
               <Link to="/login" onClick={() => setIsOpen(false)} className="hover:bg-gray-800 px-3 py-2 rounded">Login</Link>
               <Link to="/register" onClick={() => setIsOpen(false)} className="hover:bg-gray-800 px-3 py-2 rounded">Register</Link>
+              <Link to="/contact" onClick={() => setIsOpen(false)} className="hover:bg-gray-800 px-3 py-2 rounded">Contact</Link>
             </>
           )}
         </div>
