@@ -58,15 +58,19 @@ export default function Login() {
           </span>
         </div>
 
-        {/*
+        
 <p className="text-right text-sm mt-1">
   <a href="/forgot-password" className="text-blue-600 hover:underline">
     Forgot Password?
   </a>
 </p>
-*/}
+   
+       
 
         <button className="w-full bg-green-600 text-white p-2 rounded">Login</button>
+        <button className="w-full bg-gray-600 text-white p-2 rounded"><a href="/register" className="text-white-600 ">
+            Create Account
+          </a></button>
       </form>
     </div>
   );
