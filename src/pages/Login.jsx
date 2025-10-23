@@ -68,9 +68,13 @@ export default function Login() {
        
 
         <button className="w-full bg-green-600 text-white p-2 rounded">Login</button>
-        <button className="w-full bg-gray-600 text-white p-2 rounded"><a href="/register" className="text-white-600 ">
-            Create Account
-          </a></button>
+        <button 
+  onClick={() => window.location.href = '/register'}
+  className="w-full bg-gray-600 text-white p-2 rounded"
+>
+  Create Account
+</button>
+
       </form>
     </div>
   );

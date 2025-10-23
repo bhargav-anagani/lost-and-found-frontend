@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../api/api';
 import { FaBoxOpen } from 'react-icons/fa';
 
@@ -6,7 +7,7 @@ export default function Profile() {
   const [items, setItems] = useState([]);
   const [deletingId, setDeletingId] = useState(null);
 
-  // Get user info from localStorage (adjust if using context)
+  // Get user info from localStorage
   const [user, setUser] = useState({ name: '', email: '' });
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -50,11 +51,15 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen p-6">
-      {/* ✅ User Info Section always visible */}
-      <div className="mb-6 bg-gray-100 p-4 rounded shadow">
-        <h2 className="text-2xl font-bold font-serif">Name: {user.name || 'Your Name'}</h2>
-        <h2 className="text-gray-700">Email: {user.email || 'your.email@example.com'}</h2>
-      </div>
+      {/* User Info */}
+{/* User Info */}
+{/* User Info */}
+<div className="mb-6 bg-gray-100 p-4 rounded shadow max-w-md">
+  <h2 className="text-2xl font-bold font-serif break-words">Name: {user.name || 'Your Name'}</h2>
+  <h2 className="text-gray-700 break-words">Email: {user.email || 'your.email@example.com'}</h2>
+</div>
+
+
 
       {/* Uploads Section */}
       {items.length > 0 ? (
@@ -71,37 +76,46 @@ export default function Profile() {
 
                 {it.type === 'Found' ? (
                   <p className="text-base">
-                    <span className="font-bold">Found at:</span> {it.foundDateTime ? new Date(it.foundDateTime).toLocaleString() : 'N/A'}
+                    <span className="font-bold">Found at:</span> {it.foundDateTime || 'N/A'}
                   </p>
                 ) : (
                   <p className="text-base">
-                    <span className="font-bold">Lost at:</span> {it.lostDateTime ? new Date(it.lostDateTime).toLocaleString() : 'N/A'}
+                    <span className="font-bold">Lost at:</span> {it.lostDateTime || 'N/A'}
                   </p>
                 )}
 
-                <button
-                  onClick={() => handleDelete(it)}
-                  disabled={deletingId === it._id}
-                  className="mt-3 px-3 py-1 bg-red-500 text-white rounded hover:opacity-90"
-                >
-                  {deletingId === it._id ? 'Deleting...' : 'Delete'}
-                </button>
+                {/* Edit & Delete Buttons */}
+                <div className="flex space-x-2 mt-3">
+                  <Link
+                    to={`/items/${it._id}`}
+                    className="px-3 py-1 bg-red-500 text-white rounded hover:opacity-90"
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(it)}
+                    disabled={deletingId === it._id}
+                    className="px-3 py-1 bg-red-500 text-white rounded hover:opacity-90"
+                  >
+                    {deletingId === it._id ? 'Deleting...' : 'Delete'}
+                  </button>
+                </div>
               </div>
             ))}
           </div>
         </>
       ) : (
-        // ✅ No uploads placeholder directly on page background
+        // No uploads placeholder
         <div className="flex flex-col items-center justify-center mt-6">
           <FaBoxOpen className="text-gray-400 text-5xl mb-3" />
           <p className="text-white text-xl font-semibold font-serif">No uploads yet</p>
           <p className="text-gray-400 mt-1 text-sm">Start by uploading a lost or found item</p>
-          <button
-            onClick={() => window.location.href = '/upload'} 
+          <Link
+            to="/upload"
             className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
           >
             Upload Now
-          </button>
+          </Link>
         </div>
       )}
     </div>
