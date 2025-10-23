@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 export default function ItemCard({ item }) {
   const [isZoomed, setIsZoomed] = useState(false);
 
-  const formatDate = (dateStr) => {
+  // Format date/time exactly as stored (ignores timezone conversion)
+  const formatExact = (dateStr) => {
     if (!dateStr) return 'N/A';
-    return new Date(dateStr).toLocaleString();
+    // Replace 'T' with space, remove seconds and timezone
+    return dateStr.replace('T', ' ').slice(0, 16); // e.g., "2025-10-19 17:30"
   };
 
   return (
@@ -65,8 +67,8 @@ export default function ItemCard({ item }) {
             </span>
             <span className="ml-1 text-gray-900 font-sans">
               {item.type === 'Found' 
-                ? formatDate(item.foundDateTime) 
-                : formatDate(item.lostDateTime)}
+                ? formatExact(item.foundDateTime) 
+                : formatExact(item.lostDateTime)}
             </span>
           </p>
 
@@ -87,16 +89,6 @@ export default function ItemCard({ item }) {
             <span className="font-bold text-black">Status:</span>
             <span className="ml-1 text-gray-900 font-sans">{item.status}</span>
           </p>
-
-          {/* View Details Link 
-          <div>
-            <Link
-              to={`/items/${item._id}`}
-              className="text-indigo-600 font-semibold hover:underline"
-            >
-              Edit details
-            </Link>
-          </div>*/}
         </div>
       </div>
 
