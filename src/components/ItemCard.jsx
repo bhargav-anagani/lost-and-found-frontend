@@ -84,6 +84,15 @@ export default function ItemCard({ item }) {
             </span>
           </p>
 
+          {item.uploadedByEmail && (
+            <p className="text-sm md:text-base mb-2">
+              <span className="font-bold text-black">Uploaded by:</span>
+              <span className="ml-1 text-gray-900 font-sans">{item.uploadedByEmail}</span>
+            </p>
+          )}
+
+          
+
           {/* Status */}
           <p className="text-sm md:text-base mb-2">
             <span className="font-bold text-black">Status:</span>
