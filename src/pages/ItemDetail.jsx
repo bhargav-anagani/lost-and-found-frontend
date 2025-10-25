@@ -84,7 +84,7 @@ export default function ItemDetail() {
               placeholder="New holder"
             />
             {!isUploader && (
-              <p className="text-sm text-red-500 mt-1">Only the uploader can update the holder</p>
+              <p className="text-sm text-red-500 mt-1">Please Login Again to edit your</p>
             )}
           </div>
         )}
@@ -111,8 +111,9 @@ export default function ItemDetail() {
             )}
           </select>
           {!isUploader && (
-            <p className="text-sm text-red-500 mt-1">Only the uploader can update the status</p>
-          )}
+  <p className="text-sm text-red-500 mt-1">Please Login Again to edit your Uploads</p>
+)}
+
         </div>
 
         {/* Save button only for uploader */}
